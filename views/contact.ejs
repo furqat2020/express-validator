@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="container mt-3"><a href="/">Home</a> | <a href="/contact">Contact</a></nav>
+    <h1 class="text-center mt-4 text-info">Contact</h1>
+    <hr class="bg-info">
+
+    <div style="width: 30rem;" class="container">
+
+        <% if(Object.keys(errors).length === 0) { %>
+        <% } else { %>
+            <% Object.values(errors).forEach(item => { %>
+                <div class="alert alert-danger p-1 text-center"><%= item.msg %></div>
+            <% }) %>
+        <% } %>
+
+        <form method="POST" action="/contact">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Email</label>
+                <input name="email"type="email" class="form-control  <%= errors.email ? 'border-danger' : 'border-info' %>" id="exampleFormControlInput1">
+                <% if(errors.email) { %>
+                    <small class="text-danger"><%= errors.email.msg %></small>
+                <% } %>
+            </div>
+            <div class="form-group <%= errors.message ? 'border-danger' : '' %>">
+                <label for="exampleFormControlTextarea1">Xabar</label>
+                <textarea name="message" class="form-control  <%= errors.message ? 'border-danger' : 'border-info' %>" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <% if(errors.message) { %>
+                    <small class="text-danger"><%= errors.message.msg %></small>
+                <% } %>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-info btn-sm">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
